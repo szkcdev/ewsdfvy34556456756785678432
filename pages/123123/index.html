@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>321 | ClipFarm</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0f0f15;
+    color: #fff;
+  }
+
+  .profile-card {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #1b1b28;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  }
+
+  .profile-header {
+    position: relative;
+    text-align: center;
+  }
+
+  .profile-bg {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .profile-avatar {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border: 4px solid #6d6dff;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #222;
+  }
+
+  .profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-name {
+    margin-top: 70px;
+    font-size: 2rem;
+    color: #6d6dff;
+    text-shadow: 0 0 10px #6d6dff;
+  }
+
+  .profile-username {
+    color: #aaa;
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+
+  .profile-bio {
+    margin: 20px 40px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .social-links a {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #272736;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.3s;
+  }
+
+  .social-links a:hover {
+    transform: scale(1.05);
+    background: #6d6dff;
+  }
+
+  audio {
+    margin-bottom: 20px;
+    outline: none;
+  }
+
+  /* Animated neon effect for name */
+  @keyframes neonPulse {
+    from { text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; }
+    to { text-shadow:0 0 10px #fff,0 0 20px #6d6dff,0 0 30px #6d6dff; }
+  }
+  .username-effect-neon {
+    animation: neonPulse 1.5s infinite alternate;
+  }
+
+  .char {
+    display:inline-block;
+    transition: transform 0.3s;
+  }
+  .char:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="profile-bg" style="background-image: url('banner.gif');"></div>
+      <div class="profile-avatar">
+        <img src="avatar.png" alt="Avatar">
+      </div>
+      <h1 class="profile-name username-effect-neon">321</h1>
+      <div class="profile-username">@123123</div>
+      <p class="profile-bio">123123123</p>
+      <div class="social-links">
+        
+      </div>
+      {{#if custom_music}}
+        <audio autoplay loop controls src=""></audio>
+      {{/if}}
+    </div>
+  </div>
+
+<script>
+  // Neon flicker effect
+  const neonElements = document.querySelectorAll(".username-effect-neon");
+  setInterval(() => {
+    neonElements.forEach(el => el.style.opacity = Math.random() > 0.5 ? "1" : "0.85");
+  }, 500);
+</script>
+</body>
+</html>
