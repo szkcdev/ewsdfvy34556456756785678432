@@ -3,143 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{profile_name}} | ClipFarm</title>
+<title>{{profile_name}} - ClipFarm</title>
+<link rel="icon" href="/assets/dsc/favicon.png">
 <style>
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0f0f15;
-    color: #fff;
-  }
+  /* Reset & Body */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background:#121212; color:#eee; display:flex; justify-content:center; padding:40px 20px; }
 
-  .profile-card {
-    max-width: 900px;
-    margin: 50px auto;
-    background: #1b1b28;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-  }
+  /* Profile Card */
+  .profile-card { width:100%; max-width:600px; background:#1f1f1f; border-radius:16px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.6); }
 
-  .profile-header {
-    position: relative;
-    text-align: center;
-  }
+  /* Banner & Avatar */
+  .profile-bg { width:100%; height:220px; background-image:url('{{banner_image}}'); background-size:cover; background-position:center; transition:0.3s; }
+  .profile-avatar { width:130px; height:130px; border-radius:50%; overflow:hidden; border:4px solid #4a90ff; position:relative; top:-65px; margin:auto; cursor:pointer; transition:0.3s; }
+  .profile-avatar img { width:100%; height:100%; object-fit:cover; }
 
-  .profile-bg {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-  }
+  /* Profile Info */
+  .profile-name { text-align:center; font-size:2rem; color:#4a90ff; margin-top:-40px; text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; }
+  .profile-username { text-align:center; color:#ccc; font-size:1rem; margin-bottom:10px; }
+  .profile-bio { text-align:center; padding:0 25px; margin-bottom:15px; }
+  .profile-bio .char { display:inline-block; transition: transform 0.3s; }
+  .profile-bio .char:hover { transform:translateY(-2px); }
 
-  .profile-avatar {
-    position: absolute;
-    top: 140px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 120px;
-    border: 4px solid #6d6dff;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #222;
-  }
+  /* Social Links */
+  .social-links { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+  .social-links a { padding:8px 12px; background:#292929; color:#4a90ff; border-radius:8px; text-decoration:none; font-weight:500; transition:0.3s; }
+  .social-links a:hover { background:#4a90ff; color:#121212; transform:scale(1.05); }
 
-  .profile-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  /* Music Player */
+  audio { display:block; margin:0 auto 20px; width:90%; border-radius:10px; outline:none; }
 
-  .profile-name {
-    margin-top: 70px;
-    font-size: 2rem;
-    color: #6d6dff;
-    text-shadow: 0 0 10px #6d6dff;
-  }
-
-  .profile-username {
-    color: #aaa;
-    margin-top: 5px;
-    font-size: 1rem;
-  }
-
-  .profile-bio {
-    margin: 20px 40px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-
-  .social-links a {
-    display: inline-block;
-    padding: 10px 15px;
-    background: #272736;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: transform 0.3s;
-  }
-
-  .social-links a:hover {
-    transform: scale(1.05);
-    background: #6d6dff;
-  }
-
-  audio {
-    margin-bottom: 20px;
-    outline: none;
-  }
-
-  /* Animated neon effect for name */
-  @keyframes neonPulse {
-    from { text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; }
-    to { text-shadow:0 0 10px #fff,0 0 20px #6d6dff,0 0 30px #6d6dff; }
-  }
-  .username-effect-neon {
-    animation: neonPulse 1.5s infinite alternate;
-  }
-
-  .char {
-    display:inline-block;
-    transition: transform 0.3s;
-  }
-  .char:hover { transform: translateY(-2px); }
+  /* Animations */
+  @keyframes neonPulse { from { text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; } to { text-shadow:0 0 10px #ffffff,0 0 20px #6d6dff,0 0 30px #6d6dff; } }
+  .username-effect-neon { animation: neonPulse 1.5s infinite alternate; }
 </style>
 </head>
 <body>
   <div class="profile-card">
-    <div class="profile-header">
-      <div class="profile-bg" style="background-image: url('{{banner_image}}');"></div>
-      <div class="profile-avatar">
-        <img src="{{profile_image}}" alt="Avatar">
-      </div>
-      <h1 class="profile-name username-effect-neon">{{profile_name}}</h1>
-      <div class="profile-username">@{{username}}</div>
-      <p class="profile-bio">{{bio}}</p>
-      <div class="social-links">
-        {{social_links}}
-      </div>
-      {{#if custom_music}}
-        <audio autoplay loop controls src="{{custom_music}}"></audio>
-      {{/if}}
-    </div>
+    <div class="profile-bg"></div>
+    <div class="profile-avatar"><img src="{{profile_image}}" alt="Avatar"></div>
+    <h1 class="profile-name username-effect-neon">{{profile_name}}</h1>
+    <div class="profile-username">@{{username}}</div>
+    <p class="profile-bio">{{bio}}</p>
+    <div class="social-links">{{social_links}}</div>
+    {{custom_music}}
   </div>
 
-<script>
-  // Neon flicker effect
-  const neonElements = document.querySelectorAll(".username-effect-neon");
-  setInterval(() => {
-    neonElements.forEach(el => el.style.opacity = Math.random() > 0.5 ? "1" : "0.85");
-  }, 500);
-</script>
+  <script>
+    // Neon pulse effect
+    const neonElements = document.querySelectorAll(".username-effect-neon");
+    setInterval(() => {
+      neonElements.forEach(el => el.style.opacity = Math.random() > 0.5 ? "1" : "0.8");
+    }, 500);
+  </script>
 </body>
 </html>
