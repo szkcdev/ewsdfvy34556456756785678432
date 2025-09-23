@@ -1,130 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{profile_name}} - ClipFarm</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin:0;
-      padding:0;
-      font-family:'Inter',sans-serif;
-      background:#0a0a0a;
-      color:#fff;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
-    .profile-card {
-      background:#111;
-      padding:2rem;
-      border-radius:16px;
-      width:400px;
-      text-align:center;
-      box-shadow:0 10px 25px rgba(109,109,255,0.2);
-    }
-    .profile-banner {
-      width:100%;
-      height:120px;
-      border-radius:16px;
-      background-image:url('{{banner_image}}');
-      background-size:cover;
-      background-position:center;
-      margin-bottom:1rem;
-    }
-    .profile-avatar img {
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      border:3px solid #6d6dff;
-      background:#222;
-      object-fit:cover;
-    }
-    .profile-name {
-      font-size:1.8rem;
-      color:#6d6dff;
-      margin:0.5rem 0;
-      text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff;
-      animation:neonPulse 1.5s infinite alternate;
-    }
-    @keyframes neonPulse {
-      from { text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; }
-      to { text-shadow:0 0 10px #fff,0 0 20px #6d6dff,0 0 30px #6d6dff; }
-    }
-    .profile-username { color:#aaa; margin-bottom:1rem; }
-    .profile-bio { color:#e5e5e5; margin-bottom:1rem; }
-    .social-links {
-      display:flex;
-      justify-content:center;
-      gap:0.5rem;
-      margin-bottom:1rem;
-      flex-wrap:wrap;
-    }
-    .social-links a {
-      width:50px;
-      height:50px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:#222;
-      border-radius:14px;
-      color:#fff;
-      text-decoration:none;
-      font-size:24px;
-      transition:0.3s;
-    }
-    .social-links a:hover {
-      background:#6d6dff;
-      transform:scale(1.2);
-    }
-    audio {
-      margin-top:1rem;
-      width:100%;
-      border-radius:8px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{profile_name}} - ClipFarm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family:'Inter',sans-serif;
+    background:#0a0a0a;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
+  .profile-card {
+    background:#111;
+    border-radius:20px;
+    overflow:hidden;
+    width:100%;
+    max-width:450px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(109,109,255,0.3);
+    transition:0.3s;
+  }
+  .profile-card:hover { transform:scale(1.02); }
+  .profile-banner {
+    width:100%;
+    height:140px;
+    background-image:url('{{banner_image}}');
+    background-size:cover;
+    background-position:center;
+    position:relative;
+  }
+  .profile-avatar {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:4px solid #6d6dff;
+    overflow:hidden;
+    margin:-60px auto 10px;
+    transition:0.3s;
+  }
+  .profile-avatar img { width:100%; height:100%; object-fit:cover; }
+  .profile-name {
+    font-size:1.8rem;
+    color:#6d6dff;
+    margin:0.5rem 0;
+    text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff;
+    animation:neonPulse 1.5s infinite alternate;
+  }
+  @keyframes neonPulse {
+    from { text-shadow:0 0 5px #6d6dff,0 0 10px #6d6dff,0 0 20px #6d6dff; }
+    to { text-shadow:0 0 10px #fff,0 0 20px #6d6dff,0 0 30px #6d6dff; }
+  }
+  .profile-username { color:#aaa; margin-bottom:0.8rem; }
+  .profile-bio { color:#e5e5e5; margin:0.5rem 1rem 1rem; line-height:1.4; }
+  .social-links {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    margin-bottom:1rem;
+  }
+  .social-links a {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50px;
+    height:50px;
+    background:#222;
+    border-radius:14px;
+    color:#fff;
+    text-decoration:none;
+    font-size:24px;
+    transition:0.3s;
+  }
+  .social-links a:hover {
+    background:#6d6dff;
+    transform:scale(1.2) rotate(-3deg);
+  }
+  audio {
+    margin:1rem auto;
+    width:90%;
+    border-radius:10px;
+  }
+  @media (max-width:480px) {
+    .profile-card { width:95%; }
+    .profile-avatar { width:100px; height:100px; margin:-50px auto 10px; }
+    .profile-name { font-size:1.5rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="profile-card">
-    <div class="profile-banner"></div>
-    <div class="profile-avatar"><img src="{{profile_image}}" alt="Avatar"></div>
-    <h1 class="profile-name">{{profile_name}}</h1>
-    <div class="profile-username">@{{username}}</div>
-    <p class="profile-bio">{{bio}}</p>
-    <div class="social-links">
-      <!-- Social links will be dynamically added here -->
-    </div>
-    {{#if custom_music}}
-      <audio autoplay loop controls src="{{custom_music}}"></audio>
-    {{/if}}
+<div class="profile-card">
+  <div class="profile-banner"></div>
+  <div class="profile-avatar"><img src="{{profile_image}}" alt="Avatar"></div>
+  <h1 class="profile-name">{{profile_name}}</h1>
+  <div class="profile-username">@{{username}}</div>
+  <p class="profile-bio">{{bio}}</p>
+  <div class="social-links">
+    {{social_links}}
   </div>
-
-  <script>
-    const socialLinks = {{social_links_json}}; // Passed from backend as JSON array
-
-    const container = document.querySelector(".social-links");
-
-    // Map social types to Font Awesome icons
-    const iconClasses = {
-      discord: "fab fa-discord",
-      snapchat: "fab fa-snapchat",
-      roblox: "fas fa-robot",
-      github: "fab fa-github",
-      instagram: "fab fa-instagram",
-      website: "fas fa-globe"
-    };
-
-    socialLinks.forEach(link => {
-      const a = document.createElement("a");
-      a.href = link.url;
-      a.target = "_blank";
-      const i = document.createElement("i");
-      i.className = iconClasses[link.type] || "fas fa-link";
-      a.appendChild(i);
-      container.appendChild(a);
-    });
-  </script>
+  {{custom_music}}
+</div>
 </body>
 </html>
